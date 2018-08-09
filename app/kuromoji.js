@@ -1,6 +1,7 @@
 'use strict'
 const util = require('util');
-const DIC_URL = "../node_modules/kuromoji/dict/";
+// const DIC_URL = "../node_modules/kuromoji/dict/";
+const DIC_URL = "./node_modules/kuromoji/dict/";
 
 let kuromoji = require('kuromoji');
 let builder = kuromoji.builder({
