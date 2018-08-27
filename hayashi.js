@@ -60,15 +60,17 @@ builder.build((err, tokenizer) => {
   }
 
   let tokens = tokenizer.tokenize(text);
+	let result = [];
 
   for(let item in tokens) {
-    let result = "";
     for( let key in tokens[item]) {
       if(result.length > 0) result += ",";
       result += tokens[item][key];
     }
-    console.log(result);
+    //console.log(result);
     // module.exports = tokenizer;
   }
-});
+	console.log(result[1]);
+	});
+
 });
