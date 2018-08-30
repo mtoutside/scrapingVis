@@ -6,6 +6,7 @@
  * 以下のword変数の内容で検索します
  */
 let word = '7125';
+const { dd } = require('dumper.js');
 const client = require('cheerio-httpcli');
 const KOKORO_URL ="http://kokoro.squares.net/";
 const util = require('util');
@@ -70,7 +71,8 @@ builder.build((err, tokenizer) => {
     //console.log(result);
     // module.exports = tokenizer;
   }
-	console.log(result[1]);
+	//console.log(result);
+  dd(result);
 	});
 
 });
