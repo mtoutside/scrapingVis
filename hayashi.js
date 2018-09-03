@@ -5,7 +5,7 @@
  *
  * 以下のword変数の内容で検索します
  */
-let word = '7125';
+let word = '1391';
 const { dd } = require('dumper.js');
 const client = require('cheerio-httpcli');
 const KOKORO_URL ="http://kokoro.squares.net/";
@@ -61,18 +61,32 @@ builder.build((err, tokenizer) => {
   }
 
   let tokens = tokenizer.tokenize(text);
-	let result = [];
+//	let result = [];
 
-  for(let item in tokens) {
-    for( let key in tokens[item]) {
-      if(result.length > 0) result += ",";
-      result += tokens[item][key];
-    }
+//  for(let item in tokens) {
+//    for( let key in tokens[item]) {
+//      if(result.length > 0) result += ",";
+//      result += tokens[item][key];
+//    }
     //console.log(result);
     // module.exports = tokenizer;
-  }
+//  }
 	//console.log(result);
-  dd(result);
-	});
+//  dd(result);
+//	});
+  let result = [];
+  for(let item in tokens) {
+    //for( let key in tokens[item]) {
+      //if(result.length > 1) result += ",";
+      //result += tokens[item].surface_form;
+      let word = tokens[item].surface_form;
+			result.push(word);
+      //console.dir(result[item]);
 
+    //}
+    console.dir(result);
+    module.exports = tokenizer;
+  }
+//	    console.log(result);
+});
 });
