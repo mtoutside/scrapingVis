@@ -84,9 +84,9 @@ builder.build((err, tokenizer) => {
       //console.dir(result[item]);
 
     //}
-    console.dir(result);
+    // console.dir(result);
     module.exports = tokenizer;
   }
-//	    console.log(result);
+	    console.log(result[9]);
 });
 });
