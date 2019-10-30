@@ -19,7 +19,13 @@ app.listen(port, () => console.log(`App started on port ${port}.`));
 // const { fetchAuthorProfile } = require('./app/scotch');
 
 // Add the Scotch author profile route
+
+let posts = [];
 app.get('/', (req, res, next) => {
-  let post = getPosts;
-  console.table(post);
+  posts = res;
+  console.log(posts);
+
+  // posts.forEach(post => {
+  //   console.log(post);
+  // });
 });
