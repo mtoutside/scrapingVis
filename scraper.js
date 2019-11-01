@@ -1,5 +1,3 @@
-import axios from 'axios';
-import cheerio from 'cheerio';
 import client from 'cheerio-httpcli';
 import kuromoji from 'kuromoji';
 const DIC_URL = "./node_modules/kuromoji/dict/";
@@ -28,35 +26,45 @@ async function getText(html) {
   return list;
 }
 
-async function tokenize(text) {
+function tokenize(text) {
 
-  await builder.build(async (err, tokenizer) => {
-    if(err) {
-      console.log(err);
-      return;
-    }
+  let tokens;
+  return new Promise((resolve) => {
+    builder.build((err, tokenizer) => {
+      if(err) {
+        console.log(err);
+        return;
+      }
 
-    let tokens = await tokenizer.tokenize(text);
-    // for(let item in tokens) {
-    //   let word = tokens[item].surface_form;
-    //   skiz.push(word);
-    // }
-    skiz.push(tokens);
-    return skiz;
-    // return tokens.map(async (token) => {
-    //   return await token.surface_form;
-    // });
+      let tokens = tokenizer.tokenize(text);
+
+      // console.log(tokens);
+      for(let item in tokens) {
+        let word = tokens[item].surface_form;
+        skiz.push(word);
+      }
+      resolve(skiz);
+      // return skiz;
+      // return tokens.map(async (token) => {
+      //   return await token.surface_form;
+      // });
+    });
   });
 }
 
 async function go() {
   const html = await getText(URL);
-  // const wow = await tokenize(html[0]);
-  const wow = await tokenize('私はおいしくいただきました。');
-  // getText(await getHTML(URL));
-  // const ddd = await getText(URL);
-  console.log(wow);
+  const wow = await tokenize(html[0]);
+  return new Promise((resolve) => {
+    resolve(wow);
+  });
 }
 
 
-go();
+// go();
+
+module.exports = {
+  getText,
+  tokenize,
+  go
+}

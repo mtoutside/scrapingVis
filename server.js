@@ -1,7 +1,8 @@
 // Require dependencies
 const logger = require('morgan');
 const express = require('express');
-const getPosts = require('./hayashi');
+// const getPosts = require('./hayashi');
+const { go } = require('./scraper');
 
 // express application init
 const app = express();
@@ -20,10 +21,11 @@ app.listen(port, () => console.log(`App started on port ${port}.`));
 
 // Add the Scotch author profile route
 
+const tex = go();
+console.log(tex);
 let posts = [];
 app.get('/', (req, res, next) => {
-  posts = res;
-  console.log(posts);
+  res.json(tex);
 
   // posts.forEach(post => {
   //   console.log(post);
