@@ -21,11 +21,11 @@ app.listen(port, () => console.log(`App started on port ${port}.`));
 
 // Add the Scotch author profile route
 
-const tex = go();
-console.log(tex);
-let posts = [];
 app.get('/', (req, res, next) => {
-  res.json(tex);
+  go()
+    .then((tex) => {
+      res.json(tex);
+    });
 
   // posts.forEach(post => {
   //   console.log(post);
