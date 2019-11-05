@@ -22,6 +22,7 @@ app.listen(port, () => console.log(`App started on port ${port}.`));
 // Add the Scotch author profile route
 
 app.get('/', (req, res, next) => {
+  res.set({ 'Access-Control-Allow-Origin': '*'});
   go()
     .then((tex) => {
       res.json(tex);
