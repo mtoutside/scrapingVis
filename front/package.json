@@ -1,0 +1,34 @@
+{
+  "name": "scrapingvis-front",
+  "version": "1.0.0",
+  "description": "scrape and visualize",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run server & npm run watch",
+    "server": "browser-sync start -c ./config/bs-config.js",
+    "watch": "webpack --mode development --config ./config/webpack.config.js -w",
+    "build-dev": "webpack --mode development --config ./config/webpack.config.js",
+    "build-prod": "webpack --mode production --config ./config/webpack.config.js",
+    "lint": "eslint './src/**/*.js' --fix"
+  },
+  "author": "mtoutside",
+  "license": "MIT",
+  "dependencies": {
+    "p5": "^0.10.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/polyfill": "^7.4.4",
+    "babel-loader": "^8.0.6",
+    "browser-sync": "^2.26.7",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "glob": "^7.1.5",
+    "path": "^0.12.7",
+    "prettier": "^1.18.2",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  }
+}
