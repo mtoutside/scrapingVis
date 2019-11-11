@@ -9,13 +9,13 @@ export default function sketch(p) {
   const SGN = [1, 1, -1, -1];
 
   p.preload = () => {
-    data = p.loadJSON(url);
+    data = p.loadJSON('./assets/data.json');
   }
   p.setup = () => {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.colorMode(p.HSB, 360, 100, 100, 100);
     p.background(360);
-    p.generateFibo(num);
+    p.generateFibo(p.random(5, num));
     p.divSquare(0, 0, 0, 0, 1, 1);
     p.cursor(p.CROSS);
     p.frameRate(1);
@@ -23,12 +23,13 @@ export default function sketch(p) {
 
   p.windowResized = () => {
     p.resizeCanvas(p.windowWidth, p.windowHeight);
+    p.divSquare(0, 0, 0, 0, 1, 1);
 
   }
   p.draw = () => {
     p.background(360, 0, 100, 10);
     // let str = data[p.int(p.random(Object.keys(data).length))];
-    p.separateGrid(0, 0, p.width);
+    // p.separateGrid(0, 0, p.width);
     let str = data[count];
     // p.textSize(p.random(14, 22));
     // p.text(str, p.mouseX, p.mouseY);
@@ -121,22 +122,24 @@ export default function sketch(p) {
    */
   p.colRect = (xPos, yPos, wd, ht, index) => {
     let scalar = p.width / fibo[0];
-    p.fill((index * 1 / num) % 1, 100, 100);
-    p.rect(scalar * xPos, scalar * yPos, scalar * wd, scalar * ht);
+    let str = data[index];
+    // p.fill((index * 1 / num) % 1, 100, 100);
+      // str = data[i];
+      // p.rect(scalar * xPos, scalar * yPos, scalar * wd, scalar * ht);
+      p.textAlign(p.CENTER, p.CENTER);
+    for(let i = 0; i < 200; i++) {
+      str = data[i];
+      p.text(str, scalar * xPos * p.random(wd) * i * 0.01, scalar * yPos *  p.random(ht) * i * 0.1);
+    }
   }
 
   p.mouseReleased = () => {
     count = 0;
+    p.generateFibo(p.random(num));
+    p.divSquare(0, 0, 0, 0, 1, 1);
   }
 
   p.keyPressed = () => {
     if(p.keyCode === p.DELETE || p.keyCode === p.BACKSPACE) p.background(255);
-  }
-
-  p.keyReleased = () => {
-    if(p.key === 'r' || p.key === 'R') {
-      data = p.loadJSON(url);
-      p.draw();
-    }
   }
 }
