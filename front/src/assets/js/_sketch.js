@@ -3,6 +3,9 @@ export default function sketch(p) {
   let url = 'http://localhost:3000';
   let data;
   let count = 0;
+  let posX = 10;
+  let posY = 0;
+  let textLength;
   let num = 20;
   let thr = 1;
   let fibo = [];
@@ -15,15 +18,18 @@ export default function sketch(p) {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.colorMode(p.HSB, 360, 100, 100, 100);
     p.background(360);
-    p.generateFibo(p.random(5, num));
-    p.divSquare(0, 0, 0, 0, 1, 1);
+    // p.generateFibo(p.random(5, num));
+    // p.divSquare(0, 0, 0, 0, 1, 1);
     p.cursor(p.CROSS);
     p.frameRate(1);
+    textLength = Object.keys(data).length;
+    posY = 20;
+    p.drawText();
   };
 
   p.windowResized = () => {
     p.resizeCanvas(p.windowWidth, p.windowHeight);
-    p.divSquare(0, 0, 0, 0, 1, 1);
+    // p.divSquare(0, 0, 0, 0, 1, 1);
 
   }
   p.draw = () => {
@@ -32,12 +38,24 @@ export default function sketch(p) {
     // p.separateGrid(0, 0, p.width);
     let str = data[count];
     // p.textSize(p.random(14, 22));
-    // p.text(str, p.mouseX, p.mouseY);
     count++;
 
-    if(count >= data.length) count = 0;
+
+    if(count >= textLength) count = 0;
 
   };
+
+  p.drawText = () => {
+    for(let i = 0; i < textLength; i++) {
+      p.text(data[i], posX, posY);
+
+      posX += p.textWidth(data[i]);
+      if (posX >= p.width - 200) {
+        posY += 30;
+        posX = 20;
+      }
+    }
+  }
 
   p.separateGrid = (x, y, d) => {
     let sepNum = p.int(p.random(1, 4));
@@ -135,8 +153,10 @@ export default function sketch(p) {
 
   p.mouseReleased = () => {
     count = 0;
-    p.generateFibo(p.random(num));
-    p.divSquare(0, 0, 0, 0, 1, 1);
+    // p.generateFibo(p.random(num));
+    // p.divSquare(0, 0, 0, 0, 1, 1);
+    posY = 0;
+    p.drawText();
   }
 
   p.keyPressed = () => {
